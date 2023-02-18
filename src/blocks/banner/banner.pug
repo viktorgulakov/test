@@ -31,8 +31,8 @@ mixin banner(data, mods)
       }
     }
 
-  .banner.lazy-container(class=allMods, data-animation='')&attributes(attributes)
-    .banner__inner.lazy(data-bg=data.bgImage)
+  .banner(class=allMods, data-animation='')&attributes(attributes)
+    .banner__inner(style={'background-image': `url(${data.bgImage})`})
       .banner__content
         h2.banner__title(data-words-animation='')!= data.title
         if(data.button)
