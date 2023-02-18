@@ -1,0 +1,116 @@
+//- Все примеси в этом файле должны начинаться c имени блока (offices)
+
+mixin offices(data, mods)
+
+  //- Принимает:
+  //-   {
+  //-     image: {string}, - фоновое изображение
+  //-     cities: [  {array}, - список городов
+  //-       { - город
+  //-         name: {string}, - название города
+  //-         district: {string}, - облость города
+  //-         mods: {string}, - модификаторы города (large, medium, top-text)
+  //-         coords: {, - top и left для позиционирования
+  //-           top: {string},
+  //-           left: {string},
+  //-         },
+  //-       },
+  //-     ]
+  //-   },
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+        +offices({
+            image: `${imagePagePath}offices/map.svg`,
+            cities: [
+              {name: 'Москва', district: 'moscow', mods: 'medium', coords: {top: '36.9%', left: '11.9%'}},
+              {name: 'Воронеж', district: 'center', mods: '', coords: {top: '40.8%', left: '7.9%'}},
+              {name: 'Ярославль', district: 'center', mods: '', coords: {top: '32.6%', left: '15%'}},
+              {name: 'Белгород', district: 'center', mods: '', coords: {top: '45.7%', left: '7.6%'}},
+              {name: 'Санкт-Петербург', district: 'northwest', mods: 'large', coords: {top: '21.5%', left: '12.6%'}},
+            ],
+            districts: [
+              {
+                name: 'Все', id: 'all', active: true,
+              },
+              {
+                name: 'Москва', id: 'moscow',
+              },
+              {
+                name: 'Центр', id: 'center',
+                cities: [
+                  {name: 'Воронеж', link: '#!'},
+                  {name: 'Ярос&shy;лавль', link: '#!'},
+                  {name: 'Белгород', link: '#!'},
+                ]
+              },
+              {
+                name: 'Северо-Запад', id: 'northwest',
+                cities: [
+                  {name: 'Санкт-Петербург', link: '#!'},
+                  {name: 'Калининград', link: '#!'},
+                ]
+              },
+            ]
+          }, 'some-mod')
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' offices--' + modsList[i].trim();
+      }
+    }
+
+    var listData = data.districts.slice(1)
+  .offices(class=allMods, data-offices='', data-animation='offices', data-animation-offset='0.3' )&attributes(attributes)
+    .offices__top-wrapper
+      .offices__top
+        +offices-list(listData)
+        .offices__filter(data-offices-filter='')
+          +slider({
+            type: 'default',
+            pagination: false,
+            sliderSetting: data.sliderSetting,
+          })
+            each district in data.districts
+              +slider-slide
+                .offices__filter-option(class=(district.active ? 'offices__filter-option--active' : ''), data-offices-filter-option=district.id)!= district.name
+    .offices__map-wrapper(data-offices-map-wrapper='')
+      .offices__map
+        img(src=data.image, alt='')
+        each city in data.cities
+          +offices-point(city)
+
+
+mixin offices-point(data)
+  -
+    // список модификаторов
+      var allPointMods = '';
+      if(data.mods) {
+        var modsPointList = data.mods.split(',');
+        for (var i = 0; i < modsPointList.length; i++) {
+          allPointMods = allPointMods + ' offices__point--' + modsPointList[i].trim();
+        }
+      }
+  .offices__point(class=allPointMods, style=data.coords, data-point-district=data.district)
+    .offices__point-text!= data.name
+
+mixin offices-list(data)
+
+  .offices-list(data-offices-list='')
+    .offices-list__toggle(data-offices-list-toggle='') Офисы Softline
+    .offices-list__districts
+      .offices-list__districts-inner
+        each el in data
+          .offices-list__district(data-offices-list-district='')
+            .offices-list__district-title(data-offices-list-district-title='')!= el.name
+            if(el.cities)
+              .offices-list__cities
+                each city in el.cities
+                  .offices-list__city
+                    if(city.link)
+                      a(href=city.link)!=city.name
+                    else
+                      !=city.name

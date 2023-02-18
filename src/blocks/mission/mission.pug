@@ -1,0 +1,35 @@
+//- Все примеси в этом файле должны начинаться c имени блока (mission)
+
+mixin mission(data, mods)
+
+  //- Принимает:
+  //-   {
+  //-     title: {string}, - заголовок
+  //-     text: {string}, - описание
+  //-   },
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+        +mission({
+          title: 'Миссия Softline',
+          text: 'Мы&nbsp;помогаем организациям трансформироваться, работать эффективно и&nbsp;безопасно в&nbsp;условиях цифровой экономики.',
+        }, 'some-mod')
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' mission--' + modsList[i].trim();
+      }
+    }
+
+
+  .mission(class=allMods, data-animation='')&attributes(attributes)
+    .mission__patterns
+    .mission__bg
+    .mission__inner
+      .mission__texts
+        h2.mission__title!= data.title
+        .mission__description!= data.text
+

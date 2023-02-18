@@ -1,0 +1,40 @@
+//- Все примеси в этом файле должны начинаться c имени блока (banner)
+
+mixin banner(data, mods)
+  //- Принимает:
+  //-   {
+  //-     bgImage: {string}, - фоновое изображение
+  //-     title: {string}, - заголовок
+  //-     button: { {object}, - кнопка
+  //-       text: {text}, - текст кнопки
+  //-       link: {string}, - ссылка кнопки
+  //-     },
+  //-   },
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+        +banner({
+          bgImage: `${imagePagePath}banner/bg.jpg`,
+          title: '<span class="word"><span class="word-wrap">Поставщик</span></span><span class="word"><span class="word-wrap">услуг</span></span><span class="word"><span class="word-wrap">цифровой</span></span><span class="word"><span class="word-wrap">трансформации</span></span><span class="word"><span class="word-wrap">и&nbsp;кибербезопасности</span></span>',
+          button: {
+            text: 'На сайт',
+            link: '#!',
+          }
+        }, 'some-mod')
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' banner--' + modsList[i].trim();
+      }
+    }
+
+  .banner.lazy-container(class=allMods, data-animation='')&attributes(attributes)
+    .banner__inner.lazy(data-bg=data.bgImage)
+      .banner__content
+        h2.banner__title(data-words-animation='')!= data.title
+        if(data.button)
+          .banner__button
+            +btn(data.button.text)(href=data.button.link)

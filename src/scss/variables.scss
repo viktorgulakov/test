@@ -1,0 +1,50 @@
+$pathToFonts: '../fonts/';
+$pathToImages: '../img/';
+$pathToIcons: '../img/icons/';
+
+$cRed: #B01736;
+$cRedHover: #D53152;
+$cRed33: #A30C33;
+$white: hsl(0, 0%, 100%);
+
+
+$text-color: #444444;
+$body-bg: $white;
+
+$link-color: $cRed;
+$link-color--hover: $cRedHover;
+$cGray: #F0F0F0;
+
+$mobile-horizontal-indent: 1.5625vw;
+
+
+$font-family:'Proxima Nova Condensed', Arial, sans-serif;
+
+$black: hsl(0, 0%, 0%);
+$gray-darkest: hsl(0, 0%, 10%);
+$gray-darker: hsl(0, 0%, 20%);
+$gray: hsl(0, 0%, 50%);
+$gray-lighter: hsl(0, 0%, 80%);
+$gray-lightest: hsl(0, 0%, 90%);
+$cGray70: #A8A8BF;
+
+// Базовая типографика
+$font-size-sm: 0.75em; // 12px от 16px
+$typo-margin-vertical: 1em;
+$font-family--monospace: SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+
+// брейкпоинты для адаптации
+$max-small-desktop: 1600px;
+$max-tablet: 1279px;
+$max-mobile: 767px;
+$max-small-mobile: 374px;
+
+// Ширины
+$screen-sm: 480px;
+$screen-md: 767px;
+$screen-lg: 1279px;
+$screen-xl: 1440px;
+$screen-xxl: 1600px;
+
+$border-radius: 8px;
+$transition-time: 0.3s;

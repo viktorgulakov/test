@@ -1,0 +1,65 @@
+.header {
+  @include max-tablet(){
+    padding: 24px 40px;
+  }
+
+  @include max-mobile(){
+    padding: 16px $mobile-horizontal-indent;
+  }
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  padding: 29px 69px;
+
+  &__inner {
+    @include max-tablet(){
+      display: block;
+    }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    width: 125px;
+    height: 25px;
+    flex-shrink: 0;
+    margin-right: 40px;
+    display: block;
+  }
+
+  &__menu {
+    @include max-tablet(){
+      margin-top: 11px;
+    }
+    @include max-mobile(){
+      font-size: 14px;
+      margin-right: -10px;
+    }
+    display: flex;
+    flex-wrap: wrap;
+    font-weight: 600;
+    line-height: 20px;
+
+    &-item {
+      @include max-tablet(){
+        margin-right: 20px;
+        margin-left: 0;
+        margin-top: 5px;
+      }
+      @include max-mobile(){
+        line-height: 0;
+        margin-right: 10px;
+        margin-top: 4px;
+      }
+      margin-left: 20px;
+    }
+
+    &-link {
+      line-height: 1.2;
+      @include min-hover() {
+        color: $cRed33;
+      }
+      color: $text-color;
+    }
+  }
+}

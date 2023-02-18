@@ -1,0 +1,76 @@
+//- Все примеси в этом файле должны начинаться c имени блока (numbers)
+
+mixin numbers(data, mods)
+  //- Принимает:
+  //-   [ {array},
+  //-     {
+  //-       beforeSign: { - символ перед значением
+  //-         className: {string},
+  //-         text: {string},
+  //-       },
+  //-       afterSign: { - символ после значения
+  //-         className: {string},
+  //-         text: {string},
+  //-       },
+  //-       value: {string}, - значение
+  //-       text: {string}, - описание
+  //-     }
+  //-   ],
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+        +numbers([
+          {
+            beforeSign: {
+              text: '>',
+              className: 'numbers__sign--bold'
+            },
+            value: '<span data-animate-number="30"></span> лет',
+            text: 'на IT-рынке'
+          },
+          {
+            value: '<span data-animate-number="4600"></span>',
+            text: 'сотрудников в&nbsp;России'
+          },
+          {
+            value: '<span data-animate-number="25"></span>',
+            text: 'городов России'
+          },
+          {
+            afterSign: {
+              text: '+'
+            },
+            value: '<span data-animate-number="2000"></span>',
+            text: 'разработчиков'
+          },
+          {
+            afterSign: {
+              text: '+'
+            },
+            value: '<span data-animate-number="3000"></span>',
+            textClassName: 'numbers__item-text--compressed',
+            text: 'сотрудников ежегодно <br/>проходят оценку и&nbsp;обучение'
+          },
+        ], 'some-mod')
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' numbers--' + modsList[i].trim();
+      }
+    }
+
+  .numbers(class=allMods, data-animation='numbers')&attributes(attributes)
+    .numbers__items
+      each el in data
+        .numbers__item
+          .numbers__item-title
+            if(el.beforeSign)
+              span.numbers__sign(class=el.beforeSign.className)!= el.beforeSign.text
+            span!= el.value
+            if(el.afterSign)
+              span.numbers__sign(class=el.afterSign.className)!= el.afterSign.text
+          .numbers__item-text(class=el.textClassName)!= el.text
+

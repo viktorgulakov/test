@@ -1,0 +1,119 @@
+.direction {
+  @include max-tablet() {
+    height: 80px;
+    overflow: hidden;
+    transition: height $transition-time;
+  }
+  @include max-mobile() {
+    height: 60px;
+  }
+
+  @media screen and (max-width: 600px) {
+    background-size: auto 260px;
+  }
+  height: 260px;
+  background: none no-repeat top center;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  display: block;
+
+  @include for-desktop() {
+    &:hover {
+      .direction {
+
+        &__texts {
+          top: 0;
+          padding: 24px 20px;
+        }
+
+        &__title {
+          min-height: 0;
+        }
+
+        &__description {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  &__texts {
+    @include max-tablet() {
+      position: relative;
+      top: 0;
+      height: 260px;
+      cursor: pointer;
+      &:before {
+        @include max-mobile() {
+          top: 12px;
+          right: 5px;
+        }
+        content: '';
+        width: 36px;
+        height: 36px;
+        position: absolute;
+        right: 10px;
+        top: calc((80px - 36px) / 2);
+        background: url("data:image/svg+xml;charset=UTF-8,%3csvg width='36' height='36' viewBox='0 0 36 36' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M11.5713 14.7858L17.9999 21.2143L24.4284 14.7858' stroke='white' stroke-width='2'/%3e%3c/svg%3e") no-repeat center;
+
+      }
+    }
+    @include max-mobile() {
+      padding: 10px;
+      height: 240px;
+    }
+    background: rgba(#2D3653, 0.6);
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 180px;
+    height: 100%;
+    color: $white;
+    padding: 16px 20px;
+    transition: top $transition-time;
+
+    &-inner {
+      max-width: 480px;
+    }
+  }
+
+  &__title {
+    @include max-mobile() {
+      padding-right: 50px;
+      font-size: 20px;
+      min-height: 40px;
+    }
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 100%;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+  }
+
+  &__description {
+    @include max-mobile() {
+      line-height: 1.4;
+      margin-top: 10px;
+    }
+    margin-top: 20px;
+  }
+
+  &--active {
+    @include max-tablet() {
+      height: 260px;
+      .direction {
+        &__texts {
+          &:before {
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+    @include max-mobile() {
+      height: 240px;
+    }
+  }
+}
+

@@ -1,0 +1,26 @@
+@mixin headline-h2($color: $text-color) {
+  @include max-tablet() {
+    font-size: 40px;
+  }
+
+  @include max-mobile() {
+    font-size: 28px;
+  }
+
+  font-weight: 600;
+  font-size: 56px;
+  line-height: 100%;
+  color: $color;
+  letter-spacing: 0;
+}
+
+
+@mixin base-text($color: $text-color) {
+  @include max-tablet(){
+    font-size: 16px;
+  }
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: $color;
+}

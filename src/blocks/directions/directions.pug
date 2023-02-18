@@ -1,0 +1,55 @@
+//- Все примеси в этом файле должны начинаться c имени блока (directions)
+
+mixin directions(data, mods)
+
+  //- Принимает:
+  //-   {
+  //-     title: {string}, - заголовок
+  //-       src: {text} - изображение логотипа
+  //-       alt: {string}
+  //-     },
+  //-     items: [  {array}, - карточки
+  //-       { - карточка
+  //-         title: {string}, - заголовок карточки
+  //-         text: {string}, - описание карточки
+  //-         image: {string}, - изображение карточки
+  //-       }
+  //-     ]
+  //-   },
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+      +directions({
+          title: 'Направления бизнеса',
+          items: [
+            {
+              title: 'Решения Softline',
+              text: 'ГК&nbsp;Softline предлагает клиентам собственную линейку оборудования (ПК, серверы, торговое оборудование и&nbsp;проч.), разработку программных продуктов, облачных решений, решений в&nbsp;области информационной безопасности.',
+              image: `${imagePagePath}directions/1.jpg`,
+            },
+            {
+              title: 'Кибербезопасность',
+              text: 'Softline обладает всеми необходимыми государственными лицензиями для организации проектов по&nbsp;информационной безопасности и&nbsp;аттестации.',
+              image: `${imagePagePath}directions/2.jpg`,
+            },
+          ]
+        }, 'some-mod')
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' directions--' + modsList[i].trim();
+      }
+    }
+
+
+  .directions(class=allMods, data-directions)&attributes(attributes)
+    .directions__title
+      h2!= data.title
+    .directions__items
+      each el in data.items
+        .directions__item
+          +direction(el)
+

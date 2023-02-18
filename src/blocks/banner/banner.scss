@@ -1,0 +1,38 @@
+.banner {
+  &__inner{
+    @include max-tablet(){
+      padding: 40px;
+      height: 480px;
+    }
+
+    @include max-mobile(){
+      height: 300px;
+      padding: 40px $mobile-horizontal-indent;
+      display: block;
+      margin-bottom: 10px;
+    }
+    background: none no-repeat center;
+    background-size: cover;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 50px 70px;
+  }
+
+  &__content {
+    max-width: 709px;
+  }
+
+  &__button {
+    &:not(:first-child){
+      @include max-tablet(){
+        margin-top: 40px;
+      }
+      @include max-mobile(){
+        margin-top: 20px;
+      }
+      margin-top: 60px;
+    }
+  }
+}

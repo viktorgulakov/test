@@ -1,0 +1,144 @@
+a {
+  text-decoration: none;
+}
+
+.test {
+  @include max-small-desktop() {
+    opacity: 1;
+  }
+}
+
+$sectionDesktopHalfIndent: 50px;
+$sectionTabletHalfIndent: 32px;
+$sectionMobileHalfIndent: 25px;
+
+.section {
+  margin: 0;
+
+  &--overflow-hidden {
+    overflow: hidden;
+  }
+
+  &--ph {
+    @include max-tablet() {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+
+  &--pv {
+
+    @include max-tablet() {
+      padding-top: $sectionTabletHalfIndent;
+      padding-bottom: $sectionTabletHalfIndent;
+    }
+
+    @include max-mobile() {
+      padding-top: $sectionMobileHalfIndent;
+      padding-bottom: $sectionMobileHalfIndent;
+    }
+
+    padding-top: $sectionDesktopHalfIndent;
+    padding-bottom: $sectionDesktopHalfIndent;
+  }
+
+  &--pt {
+    @include max-tablet() {
+      padding-top: $sectionTabletHalfIndent;
+    }
+
+    @include max-mobile() {
+      padding-top: $sectionMobileHalfIndent;
+    }
+
+    padding-top: $sectionDesktopHalfIndent;
+  }
+
+  &--pb {
+    @include max-tablet() {
+      padding-bottom: $sectionTabletHalfIndent;
+    }
+
+    @include max-mobile() {
+      padding-bottom: $sectionMobileHalfIndent;
+    }
+
+    padding-bottom: $sectionDesktopHalfIndent;
+  }
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.highlighted-link {
+  color: $link-color;
+}
+
+
+@media screen and (min-width: $max-mobile+1) {
+
+  .is-mobile-block {
+    display: none !important; // stylelint-disable-line
+  }
+}
+
+@include max-tablet() {
+  .is-desktop-block {
+    display: none !important; // stylelint-disable-line
+  }
+}
+
+@include max-mobile() {
+  .is-tablet-block {
+    display: none !important; // stylelint-disable-line
+  }
+}
+
+@media screen and (min-width: $max-tablet+1) {
+  .is-tablet-block {
+    display: none !important; // stylelint-disable-line
+  }
+}
+
+@media screen and (max-width: $max-mobile) {
+
+  .no-mobile-block {
+    display: none !important; // stylelint-disable-line
+  }
+}
+
+
+img:not([src]):not([srcset]) {
+  visibility: hidden;
+}
+
+div.scrollbar-thumb,
+div.scrollbar-track {
+  @include max-mobile(){
+    display: none!important;
+    opacity: 0;
+  }
+}
+
+div.scrollbar-thumb {
+  width: 3px;
+  background: rgba($cGray70, 0.5);
+}
+
+div.scrollbar-thumb.scrollbar-thumb-x {
+  height: 3px;
+  width: auto;
+}
+
+div.scrollbar-track.scrollbar-track-y {
+  display: none!important;
+}
+
+div.scrollbar-track.scrollbar-track-x {
+  opacity: 1;
+  height: 3px;
+  background: transparent;
+}

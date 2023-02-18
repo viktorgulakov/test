@@ -1,0 +1,35 @@
+extends ../pug/layout.pug
+
+block meta
+  title Softline
+  meta(name='description', content='')
+block vars
+  include data/main.pug
+
+block header
+  .container
+    +header(header)
+
+block content
+  .container
+    section.section.section--pb
+      +banner(banner)
+    section.section.section--pv.section--ph
+      +about(about)
+    section.section.section--pv
+      +numbers(numbers)
+    section.section.section--pv
+      +offices(offices)
+    section.section.section--pv
+      +mission(mission)
+    section.section.section--pv
+      +directions(directions)
+    section.section.section--pv.section--ph
+      +benefits(benefits)
+    section.section.section--pv.section--ph
+      +slider-block({
+        title: 'Корпоративная жизнь'
+      })
+        each photo in gallery
+          +slider-slide()
+            +slider-block-image-slide(photo)

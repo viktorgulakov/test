@@ -1,0 +1,34 @@
+//- Все примеси в этом файле должны начинаться c имени блока (direction)
+
+mixin direction(data, mods)
+
+  //- Принимает:
+  //-   {
+  //-     title: {string}, - заголовок
+  //-     text: {string}, - описание
+  //-     image: {string}, - изображение
+  //-   },
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+        +direction({
+            title: 'Цифровая трансформация<br/>и разработка ПО',
+            text: 'Softline использует современные технологи и&nbsp;новые возможности для увеличения производительности бизнеса заказчика. В&nbsp;штате ГК&nbsp;Softline&nbsp;&mdash; 2000+&nbsp;разработчиков, которые трансформируют&nbsp;ПО под нужды конкретного предприятия.',
+            image: `${imagePagePath}directions/5.jpg`,
+          }, 'some-mod')
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' direction--' + modsList[i].trim();
+      }
+    }
+
+  .direction.lazy(class=allMods, data-bg=data.image, data-direction='')&attributes(attributes)
+    .direction__texts
+      .direction__texts-inner
+        .direction__title!= data.title
+        .direction__description!= data.text
+

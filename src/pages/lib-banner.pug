@@ -1,0 +1,27 @@
+extends ../pug/layout-block-lib.pug
+
+block meta
+  title Библиотека блоков | Banner
+block header
+  h1 Banner
+  +block-lib-code('Pug-код блока')
+    include:show-code(first-line='//- Pug-файл этого блока:') ../blocks/banner/banner.pug
+block content
+  +lib-block({
+    id: 'banner',
+    name: 'banner',
+    title: 'Banner',
+  })
+    .container
+      include ../blocks/banner/demo.pug
+    +block-lib-code('HTML-код блока')
+      include:show-code(first-line='//- HTML-код этого блока:') ../../build/blocks/banner/demo.html
+  +lib-block({
+    id: 'banner-only-text',
+    name: 'banner',
+    title: 'Banner без кнопки',
+  })
+    .container
+      include ../blocks/banner/demo-only-text.pug
+    +block-lib-code('HTML-код блока')
+      include:show-code(first-line='//- HTML-код этого блока:') ../../build/blocks/banner/demo-only-text.html

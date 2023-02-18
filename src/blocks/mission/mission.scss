@@ -1,0 +1,109 @@
+.mission {
+  background: #CB0F41;
+  color: $white;
+  position: relative;
+  overflow: hidden;
+
+  &__inner {
+    @include max-tablet(){
+      padding: 40px;
+      height: 330px;
+    }
+    @include max-mobile(){
+      padding: 32px 5px;
+      height: auto;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 70px;
+    height: 470px;
+    position: relative;
+    z-index: 3;
+  }
+
+  &__bg,
+  &__patterns {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+  &__bg {
+    z-index: 2;
+    background: rgba($cRed33, 0.5);
+  }
+
+  &__patterns {
+    z-index: 1;
+
+    &:before,
+    &:after {
+      @include max-tablet(){
+        width: calc(350px * 0.65);
+        height: calc(377px * 0.65);
+        margin-top: calc(-377px* 0.65 / 2);
+      }
+      @include max-mobile(){
+        width: 143px;
+        height: 155px;
+        margin-top: calc(-155px / 2);
+      }
+      content: '';
+      width: 350px;
+      height: 377px;
+      position: absolute;
+      top: 50%;
+      margin-top: calc(-377px / 2);
+    }
+
+    &:before {
+      @include max-mobile(){
+        left: -48px;
+      }
+      left: -42px;
+      background: url('#{$pathToImages}mission/left-pattern.png') no-repeat center;
+      background-size: contain;
+    }
+
+    &:after {
+      @include max-mobile(){
+        right: -34px;
+      }
+      right: -54px;
+      background: url('#{$pathToImages}mission/right-pattern.png') no-repeat center;
+      background-size: contain;
+    }
+  }
+
+  &__texts {
+    width: 100%;
+  }
+
+  &__title {
+    @include max-tablet(){
+      margin-bottom: 32px;
+    }
+    @include max-mobile(){
+      margin-bottom: 10px;
+    }
+    margin-bottom: 40px;
+    color: $white;
+  }
+
+  &__description {
+    @include max-tablet(){
+      font-size: 24px;
+    }
+    @include max-mobile(){
+      font-size: 16px;
+      line-height: 130%;
+    }
+    font-size: 32px;
+    line-height: 150%;
+  }
+}

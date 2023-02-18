@@ -1,0 +1,26 @@
+//- Все примеси в этом файле должны начинаться c имени блока (about)
+
+mixin about(data, mods)
+  //- Принимает:
+  //-   {
+  //-     text: {string}, - описание
+  //-   },
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+    +about({
+        text: '<a href="#">Softline</a> – ведущий поставщик IT-решений и&nbsp;сервисов.*<br/> Мы&nbsp;предлагаем комплексные IT-решения, облака, программное и&nbsp;аппаратное обеспечение, решения по&nbsp;цифровой трансформации и&nbsp;кибербезопасности, а&nbsp;также широкий спектр IT-услуг.'
+      }, 'some-mod')
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' about--' + modsList[i].trim();
+      }
+    }
+
+  .about(class=allMods, data-animation='')&attributes(attributes)
+    .about__inner
+      .about__text!= data.text

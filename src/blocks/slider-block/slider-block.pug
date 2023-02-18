@@ -1,0 +1,42 @@
+//- Все примеси в этом файле должны начинаться c имени блока (slider-block)
+
+mixin slider-block(data, mods)
+
+  //- Принимает:
+  //-   {
+  //-     title: {string}, - заголовок
+  //-   },
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+       +slider-block({
+         title: 'Корпоративная жизнь'
+       })
+         each photo in gallery
+           +slider-slide()
+             +slider-block-image-slide(photo)
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' slider-block--' + modsList[i].trim();
+      }
+    }
+
+
+  .slider-block(class=allMods)&attributes(attributes)
+    .slider-block__container
+      h2.slider-block__title!= data.title
+    .slider-block__slider(data-slider-block)
+      +slider({
+        pagination: true,
+        navigation: true,
+        sliderSetting: data.sliderSetting,
+      })
+        block
+
+mixin slider-block-image-slide(image)
+  .slider-block__slide
+    .slider-block__slide-image.lazy(data-bg=image)

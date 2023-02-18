@@ -1,0 +1,110 @@
+//- Шаблон страницы с боковым меню (off-canvas)
+block vars
+include mixins.pug
+
+//- Вывод списка макетов
+mixin lib-layout-list(data)
+  - var {title, list} = data
+  .blocks-library__layout
+    if (title)
+      .blocks-library__layout-title!= title
+    if (list)
+      ul.blocks-library__layout-list.b-list
+        each item in list
+          li.blocks-library__layout-item
+            a.blocks-library__layout-link(href!= item.layout, target='_blank')!= item.text
+
+//- Вывод фрагмента кода в блоке библиотеки
+mixin block-lib-code(title, id, hideBurger)
+  .blocks-library__code-wrapper
+    .blocks-library__code-top
+      span.blocks-library__code-show-trigger(title='Показать код')
+        if (!hideBurger)
+          i.blocks-library__code-icon
+      h3 #{title}
+    .blocks-library__code(id=id)
+      block
+
+
+//- Вывод блока библиотеки
+mixin lib-block(data)
+  - var {id, title, name} = data
+  section.blocks-library__item(id=id, data-id=id, data-name=name)
+    if(title)
+      h2.blocks-library__item-title!= title
+    block
+
+
+
+doctype html
+html(class='no-js page', lang='ru')
+
+  head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    //- Edge и ряд мобильных браузеров слишком умны. Отключим это.
+    meta(name='format-detection', content='telephone=no')
+    meta(name='format-detection', content='date=no')
+    meta(name='format-detection', content='address=no')
+    meta(name='format-detection', content='email=no')
+    meta(content='notranslate', name='google')
+
+    block meta
+      title Libs
+
+    block head
+      link(rel='stylesheet', href='css/style.css')
+      link(rel='stylesheet', href='css/dev.css')
+      noscript
+        link(rel='stylesheet', href='css/no-js.css', type='text/css')
+      script
+        include ../js/head-script.js
+
+
+      script.
+        document.addEventListener('DOMContentLoaded', function () {
+
+          // наполнение бокого меню
+          var demoBlocks = document.querySelectorAll('.blocks-library__item');
+          var offCanvasMenu = '<li class="off-canvas__menu-item"><a class="off-canvas__menu-link" data-toggle-native="off-canvas" href="/">Главная страница</a></li><li class="off-canvas__menu-item"><a class="off-canvas__menu-link" data-toggle-native="off-canvas" href="https://github.com/nicothin/NTH-start-project">Исходный репозиторий</a></li><li class="off-canvas__menu-item off-canvas__menu-item--separator"><a class="off-canvas__menu-link" data-toggle-native="off-canvas" href="http://nicothin.github.io/NTH-start-project/blocks-demo.html">Демка на github pages</a></li>';
+          for (var i = 0; i < demoBlocks.length; i++) {
+            var classes = 'off-canvas__menu-item';
+            var block = demoBlocks[i];
+            if (block.classList.contains('blocks-library__item--menusep')) { classes += ' off-canvas__menu-item--separator'; }
+            offCanvasMenu += '<li class="' + classes + '"><a class="off-canvas__menu-link" data-toggle-native="off-canvas" href="#' + block.getAttribute('id') + '" data-scroll-link>' + block.querySelector('.blocks-library__item-title').textContent + '</a></li>';
+          }
+          var offCanvasMenuContent = document.getElementById('off-canvas-menu');
+          offCanvasMenuContent.innerHTML = offCanvasMenu;
+
+          // просмотр примера кода для блока
+          var codeShowTriggers = document.querySelectorAll('.blocks-library__code-show-trigger');
+          for (var i = 0; i < codeShowTriggers.length; i++) {
+            codeShowTriggers[i].addEventListener('click', function () {
+              this.closest('.blocks-library__code-wrapper').querySelector('.blocks-library__code').classList.toggle('blocks-library__code--shown');
+            });
+          }
+
+        });
+
+  body
+    .off-canvas#off-canvas
+      aside.off-canvas__aside(role='complementary', aria-label='Меню')
+        block off-canvas
+          ul.off-canvas__menu#off-canvas-menu
+      main.off-canvas__page-content.components-demo.blocks-library(role='main')
+
+        //- Реальный контент страницы
+        .page__inner
+          .page__content
+            block header
+              p «шапка»
+            block content
+              p содержимое страницы
+            .burger.blocks-library__menu-toggler(data-toggle='off-canvas')
+              span(data-toggle='off-canvas')
+            block footer
+      .off-canvas__overlay(data-toggle='off-canvas')
+
+    block page-bottom
+      script(src='js/bundle.js')
+      script(src='js/dev.js')

@@ -1,0 +1,65 @@
+//- Все примеси в этом файле должны начинаться c имени блока (header)
+
+mixin header(data, mods)
+  //- Принимает:
+  //-   {
+  //-     bgImage: {string}, - фоновое изображение
+  //-     title: {string}, - заголовок
+  //-     logo: { {object}, - логотип
+  //-       src: {text} - изображение логотипа
+  //-       alt: {string}
+  //-     },
+  //-     menu: [  {array}, - меню
+  //-       { - элемент меню
+  //-         text: {string},
+  //-         link: {string},
+  //-       }
+  //-     ]
+  //-   },
+  //-   mods    {string} - список модификаторов
+  //- Вызов:
+        +header({
+          logo: {
+            src: `${imagePagePath}logo.svg`,
+            alt: ''
+          },
+          menu: [
+            {
+              text: 'Облачные решения',
+              link: '#!',
+            },
+            {
+              text: 'Кибербезопасность',
+              link: '#!',
+            },
+            {
+              text: 'Импортозамещение',
+              link: '#!',
+            },
+            {
+              text: 'Цифровая трансформация',
+              link: '#!',
+            }
+          ]
+        }, 'some-mod')
+
+  -
+    // список модификаторов
+    var allMods = '';
+    if(typeof(mods) !== 'undefined' && mods) {
+      var modsList = mods.split(',');
+      for (var i = 0; i < modsList.length; i++) {
+        allMods = allMods + ' header--' + modsList[i].trim();
+      }
+    }
+
+  header.header(class=allMods, data-header='')&attributes(attributes)
+      .header__inner
+        if(data.logo)
+          a.header__logo(href='/')
+            img(src!= data.logo.src, alt= data.logo.alt)
+        if(data.menu)
+          .header__menu
+            each el in data.menu
+              .header__menu-item
+                a.header__menu-link(href=el.link)!= el.text

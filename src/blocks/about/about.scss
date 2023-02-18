@@ -1,0 +1,30 @@
+.about {
+
+  &__inner {
+    @include max-tablet() {
+      padding: 60px 40px;
+    }
+    @include max-mobile() {
+      padding: 24px $mobile-horizontal-indent;
+    }
+    background: $white;
+    box-shadow: 0 0 32px rgba(0, 0, 0, 0.08);
+    padding: 99px 110px;
+  }
+
+  &__text {
+    @include max-tablet() {
+      font-size: 24px;
+    }
+    @include max-mobile() {
+      font-size: 16px;
+
+      br {
+        display: none;
+      }
+    }
+    text-align: center;
+    font-weight: 600;
+    font-size: 32px;
+  }
+}

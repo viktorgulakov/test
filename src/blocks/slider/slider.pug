@@ -1,0 +1,18 @@
+//- Все примеси в этом файле должны начинаться c имени блока (slider)
+
+mixin slider(data)
+  .slider-wrapper(data-slider-setting!=data.sliderSetting)
+    .slider.swiper(data-slider='')
+      .swiper-wrapper
+        block
+    if(data.navigation)
+      .swiper-button-prev(data-slider-button-prev='')
+      .swiper-button-next(data-slider-button-next='')
+    if(data.pagination)
+      .swiper-pagination(data-slider-pagination='')
+
+mixin slider-slide()
+  .swiper-slide(data-slide='')
+    block
+
+

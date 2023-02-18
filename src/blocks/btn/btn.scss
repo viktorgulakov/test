@@ -1,0 +1,51 @@
+// В этом файле должны быть стили для БЭМ-блока btn, его элементов,
+// модификаторов, псевдоселекторов, псевдоэлементов, @media-условий...
+// Очередность: http://nicothin.github.io/idiomatic-pre-CSS/#priority
+
+.btn {
+  @include min-hover() {
+    text-decoration: none;
+    color: $white;
+    background-color: $link-color--hover;
+  }
+
+  @include max-mobile(){
+    padding: 5px 26px;
+    font-size: 16px;
+  }
+
+  box-sizing: border-box;
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  border-radius: $border-radius;
+  border: 1px solid transparent;
+  padding: 17px 27px;
+  vertical-align: middle;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  user-select: none;
+  text-align: center;
+  font-size: 18px;
+  line-height: 20px;
+  font-family: inherit;
+  text-decoration: none;
+  color: $white;
+  background-color: $link-color;
+  background-image: none;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all $transition-time;
+  font-weight: 600;
+
+  // &:visited {
+  //   color: $text-color;
+  // }
+
+  &--disabled,
+  &:disabled {
+    @at-root a.btn--disabled {
+      pointer-events: none;
+    }
+  }
+}
