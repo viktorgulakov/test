@@ -78,10 +78,12 @@ mixin offices(data, mods)
               +slider-slide
                 .offices__filter-option(class=(district.active ? 'offices__filter-option--active' : ''), data-offices-filter-option=district.id)!= district.name
     .offices__map-wrapper(data-offices-map-wrapper='')
-      .offices__map
-        img(src=data.image, alt='')
-        each city in data.cities
-          +offices-point(city)
+      .offices__map-indent
+        .offices__map
+          svg(width='1190', height='604')
+            use(xlink:href=data.image)
+          each city in data.cities
+            +offices-point(city)
 
 
 mixin offices-point(data)

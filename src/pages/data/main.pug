@@ -2,7 +2,7 @@
   var imagePagePath = 'img/'
   var header = {
     logo: {
-      src: `${imagePagePath}logo.svg`,
+      src: `${imagePagePath}sprite.svg#logo`,
       alt: ''
     },
     menu: [
@@ -25,7 +25,7 @@
     ]
   }
   var banner = {
-    bgImage: `${imagePagePath}banner/bg.jpg`,
+    bgImage: `${imagePagePath}top-banner/banner.png`,
     title: '<span class="word"><span class="word-wrap">Поставщик</span></span><span class="word"><span class="word-wrap">услуг</span></span><span class="word"><span class="word-wrap">цифровой</span></span><span class="word"><span class="word-wrap">трансформации</span></span><span class="word"><span class="word-wrap">и&nbsp;кибербезопасности</span></span>',
     button: {
       text: 'На сайт',
@@ -71,7 +71,7 @@
   ]
 
   var offices = {
-    image: `${imagePagePath}offices/map.svg`,
+    image: `${imagePagePath}sprite.svg#map`,
     cities: [
       {name: 'Москва', district: 'moscow', mods: 'medium', coords: {top: '36.9%', left: '11.9%'}},
       {name: 'Воронеж', district: 'center', mods: '', coords: {top: '40.8%', left: '7.9%'}},
@@ -165,7 +165,7 @@
       {
         name: 'Дальний восток', id: 'far-east',
         cities: [
-          {name: '<nobr>Хабаровск</nobr>'},
+          {name: 'Хаба&shy;ровск'},
           {name: 'Владивос&shy;ток'},
         ]
       },

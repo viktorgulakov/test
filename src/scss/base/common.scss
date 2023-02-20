@@ -117,6 +117,10 @@ img:not([src]):not([srcset]) {
 
 div.scrollbar-thumb,
 div.scrollbar-track {
+  .touch &{
+    display: none!important;
+    opacity: 0;
+  }
   @include max-mobile(){
     display: none!important;
     opacity: 0;
@@ -134,7 +138,7 @@ div.scrollbar-thumb.scrollbar-thumb-x {
 }
 
 div.scrollbar-track.scrollbar-track-y {
-  display: none!important;
+
 }
 
 div.scrollbar-track.scrollbar-track-x {

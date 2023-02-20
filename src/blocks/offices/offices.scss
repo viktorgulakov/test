@@ -7,8 +7,11 @@
 
     &-wrapper {
       overflow-x: auto;
-      padding-bottom: 10px;
-      margin-bottom: -10px;
+      margin-bottom: -20px;
+    }
+
+    &-indent{
+      padding-bottom: 20px; // текст точек может выступать за пределы блока, 20px дополнительно для текста
     }
   }
 
@@ -61,6 +64,7 @@
     @include max-tablet() {
       display: block;
       padding: 28px 40px;
+      margin-bottom: 40px;
     }
     @include max-mobile() {
       padding: 18px $mobile-horizontal-indent;
@@ -76,7 +80,9 @@
     margin-bottom: 90px;
 
     &-wrapper {
-      max-height: 95px;
+      @include max-mobile(){
+        max-height: 95px;
+      }
     }
   }
 

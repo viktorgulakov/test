@@ -8,6 +8,7 @@ const fs = require('fs');
 const plumber = require('gulp-plumber');
 const del = require('del');
 const pug = require('gulp-pug');
+const svgSprite = require('gulp-svg-sprite');
 const imagemin = require('gulp-imagemin');
 const imageminPngquant = require('imagemin-pngquant');
 const browserSync = require('browser-sync').create();
@@ -122,7 +123,7 @@ function copyAssets(cb) {
 exports.copyAssets = copyAssets;
 
 function copyMainImages() {
-  return src([`${dir.src}img/**/*.{png,svg,jpg,jpeg}`,`${dir.src}blocks/**/*.{png,svg,jpg,jpeg}`])
+  return src([`${dir.src}img/**/*.{png,svg,jpg,jpeg}`,`${dir.src}blocks/**/*.{png,svg,jpg,jpeg}`, `!${dir.src}img/sprite-svg/*.svg`])
     .pipe(
       imagemin([
         imagemin.mozjpeg({ quality: 80, progressive: true }),
@@ -133,6 +134,19 @@ function copyMainImages() {
 }
 exports.copyMainImages = copyMainImages ;
 
+function createSvgSprite () {
+  return src(`${dir.src}img/sprite-svg/*.svg`)
+    .pipe(svgSprite({
+        mode: {
+          stack: {
+            sprite: "../sprite.svg"
+          }
+        },
+      }
+    ))
+    .pipe(dest(`${dir.build}img`,));
+}
+exports.createSvgSprite = createSvgSprite;
 
 function writeSassImportsFile(cb) {
   const scssImportsList = [];
@@ -416,6 +430,12 @@ function serve() {
     copyMainImages,
     reload,
   ));
+
+  // sprite.svg
+  watch([`${dir.src}img/sprite-svg/*.{svg}`], { events: ['all'], delay: 100 }, series(
+    createSvgSprite,
+    reload
+  ));
 }
 
 
@@ -446,6 +466,7 @@ exports.build = series(
   // static
   copyAssets,
   copyMainImages,
+  createSvgSprite
 );
 
 
@@ -480,6 +501,7 @@ exports.default = series(
     // static
     copyAssets,
     copyMainImages,
+    createSvgSprite
   ),
   serve,
 );

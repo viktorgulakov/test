@@ -57,7 +57,8 @@ mixin header(data, mods)
       .header__inner
         if(data.logo)
           a.header__logo(href='/')
-            img(src!= data.logo.src, alt= data.logo.alt)
+            svg(width='125', height='25')
+              use(xlink:href=data.logo.src)
         if(data.menu)
           .header__menu
             each el in data.menu
